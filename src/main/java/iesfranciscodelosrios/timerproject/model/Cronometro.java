@@ -1,7 +1,6 @@
 package iesfranciscodelosrios.timerproject.model;
 
 import javafx.application.Platform;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 public class Cronometro extends Thread{
@@ -33,57 +32,50 @@ public class Cronometro extends Thread{
         }
     }
 
-    public void reanudar() {
-        if (!running && paused) {
-            running = true;
-            startTime = System.currentTimeMillis() - tiempoPausado;
-            tiempoPausado = 0;
-            synchronized (lock) {
-                lock.notify();
-            }
-        }
-    }
+
 
     public void detener() {
         running = false;
         paused = false;
         tiempoPausado = 0;
         synchronized (lock) {
-            lock.notify(); // Notificar al hilo para que se detenga
+            lock.notify();
         }
+        Platform.runLater(() -> {
+            textHours.setText("00");
+            textMinutes.setText("00");
+            textSeconds.setText("00");
+        });
     }
 
     public void pausar() {
         if (running) {
             running = false;
+            paused = true;
             tiempoPausado = System.currentTimeMillis() - startTime;
         }
     }
 
     public void run() {
-        while (true) {
+        while (running) {
             synchronized (lock) {
-                while (!running) {
-                    try {
-                        lock.wait(); // Esperar hasta que se reanude
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        return;
+                try {
+                    while (paused) {
+                        lock.wait();
                     }
+                    long elapsedTime = System.currentTimeMillis() - startTime;
+                    String tiempoFormateado = formatoTiempo(elapsedTime);
+                    updateLabels(tiempoFormateado);
+                    lock.wait(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return;
                 }
             }
-
-            long elapsedTime = System.currentTimeMillis() - startTime;
-            String tiempoFormateado = formatoTiempo(elapsedTime);
-            updateLabels(tiempoFormateado);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return;
-            }
         }
+        running = false;
     }
+
 
 
     private String formatoTiempo(long elapsedTime) {
