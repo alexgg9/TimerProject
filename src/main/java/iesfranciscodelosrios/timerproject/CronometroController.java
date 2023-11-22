@@ -23,6 +23,9 @@ public class CronometroController {
 
     @FXML
     private void handleIniciar(ActionEvent event) {
+        if (cronometro != null && cronometro.getState() == Thread.State.TERMINATED) {
+            cronometro = new Cronometro(textHours, textMinutes, textSeconds);
+        }
         cronometro.iniciar();
     }
 
@@ -31,10 +34,6 @@ public class CronometroController {
         cronometro.pausar();
     }
 
-    @FXML
-    private void handleReanudar(ActionEvent event) {
-        cronometro.reanudar();
-    }
 
     @FXML
     private void handleDetener(ActionEvent event) {
