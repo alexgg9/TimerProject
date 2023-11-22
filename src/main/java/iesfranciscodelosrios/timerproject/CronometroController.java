@@ -4,17 +4,21 @@ import iesfranciscodelosrios.timerproject.model.Cronometro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 public class CronometroController {
 
     @FXML
-    private Label labelTiempo;
+    private Text textHours;
+    @FXML
+    private Text textMinutes;
+    @FXML
+    private Text textSeconds;
 
     private Cronometro cronometro;
 
     public void initialize() {
-        cronometro = new Cronometro();
-        cronometro.setLabelTiempo(labelTiempo);
+        cronometro = new Cronometro(textHours, textMinutes, textSeconds);
     }
 
     @FXML

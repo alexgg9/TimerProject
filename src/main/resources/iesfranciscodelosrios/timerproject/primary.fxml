@@ -12,8 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iesfranciscodelosrios.timerproject.CronometroController">
    <children>
       <GridPane layoutX="121.0" layoutY="87.0" prefHeight="263.0" prefWidth="705.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -64,15 +63,18 @@
                                     <Font size="15.0" />
                                  </font>
                               </Text>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #28798F;" text="Stop" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" style="-fx-background-color: #28798F;" text="Start" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #28798F;" text="Restart" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" onAction="#handlePausar" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #28798F;" text="Pausar" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets right="5.0" />
+                                 </GridPane.margin></Button>
+                              <Button mnemonicParsing="false" onAction="#handleIniciar" prefHeight="26.0" prefWidth="63.0" style="-fx-background-color: #28798F;" text="Iniciar" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" onAction="#handleReanudar" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #28798F;" text="Reanudar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C2C2C2;" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </GridPane.margin>
                                  <children>
-                                    <Text layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="115.73676300048828">
+                                    <Text fx:id="textHours" layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="115.73676300048828">
                                        <font>
                                           <Font size="96.0" />
                                        </font>
@@ -84,7 +86,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </GridPane.margin>
                                  <children>
-                                    <Text layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="115.73676300048828">
+                                    <Text fx:id="textMinutes" layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="115.73676300048828">
                                        <font>
                                           <Font size="96.0" />
                                        </font>
@@ -96,13 +98,18 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </GridPane.margin>
                                  <children>
-                                    <Text layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="115.73676300048828">
+                                    <Text fx:id="textSeconds" layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="115.73676300048828">
                                        <font>
                                           <Font size="96.0" />
                                        </font>
                                     </Text>
                                  </children>
                               </AnchorPane>
+                              <Button mnemonicParsing="false" onAction="#handleDetener" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #28798F;" text="Detener" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Button>
                            </children>
                         </GridPane>
                      </children>
