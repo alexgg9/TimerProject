@@ -63,11 +63,11 @@
                                     <Font size="15.0" />
                                  </font>
                               </Text>
-                              <Button mnemonicParsing="false" onAction="#handlePausar" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #28798F;" text="Pausar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                              <Button fx:id="detenerButton" mnemonicParsing="false" onAction="#handleDetener" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #28798F;" text="Pausar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets right="5.0" />
                                  </GridPane.margin></Button>
-                              <Button mnemonicParsing="false" onAction="#handleIniciar" prefHeight="26.0" prefWidth="63.0" style="-fx-background-color: #28798F;" text="Iniciar" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Button fx:id="iniciarButton" mnemonicParsing="false" onAction="#handleIniciar" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: #28798F;" text="Iniciar" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C2C2C2;" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -104,7 +104,7 @@
                                     </Text>
                                  </children>
                               </AnchorPane>
-                              <Button mnemonicParsing="false" onAction="#handleDetener" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #28798F;" text="Reiniciar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                              <Button fx:id="reiniciarButton" mnemonicParsing="false" onAction="#handleReiniciar" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: #28798F;" text="Reiniciar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>

@@ -20,7 +20,7 @@ public class Cronometro extends Thread{
     }
 
     public void iniciar() {
-        if (!running) {
+        if (!running || !isAlive()) {
             running = true;
             if (tiempoPausado == 0) {
                 startTime = System.currentTimeMillis();
@@ -28,19 +28,32 @@ public class Cronometro extends Thread{
                 startTime = System.currentTimeMillis() - tiempoPausado;
                 tiempoPausado = 0;
             }
-            start();
+            if (!isAlive()) {
+                Thread newThread = new Thread(this);
+                newThread.start();
+            }
         }
     }
 
+    public void reanudar() {
+        if (running && paused) {
+            paused = false;
+            startTime = System.currentTimeMillis() - tiempoPausado;
+            synchronized (lock) {
+                lock.notify();
+            }
+        }
+    }
 
-
-    public void detener() {
+    public void reiniciar() {
         running = false;
         paused = false;
         tiempoPausado = 0;
+        startTime = 0;
         synchronized (lock) {
             lock.notify();
         }
+        detenerHilo();
         Platform.runLater(() -> {
             textHours.setText("00");
             textMinutes.setText("00");
@@ -48,13 +61,27 @@ public class Cronometro extends Thread{
         });
     }
 
-    public void pausar() {
-        if (running) {
-            running = false;
-            paused = true;
-            tiempoPausado = System.currentTimeMillis() - startTime;
+    public void detenerHilo() {
+        if (isAlive()) {
+            interrupt();
         }
     }
+
+    public void pausar() {
+        if (running) {
+            if (!paused) {
+                paused = true;
+                tiempoPausado = System.currentTimeMillis() - startTime;
+            } else {
+                paused = false;
+                startTime = System.currentTimeMillis() - tiempoPausado;
+                synchronized (lock) {
+                    lock.notify();
+                }
+            }
+        }
+    }
+
 
     public void run() {
         while (running) {
